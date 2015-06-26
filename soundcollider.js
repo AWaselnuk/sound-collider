@@ -106,7 +106,6 @@ var playSin = function(freq) {
 };
 
 var playPerc = function(freq1, freq2) {
-  return false;
   T("perc", {
       r: 500
     }, sinFromFreq(freq1), sinFromFreq(freq2))
