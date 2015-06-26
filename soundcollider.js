@@ -16,6 +16,10 @@ var log = function(msg) {
   console.log(msg);
 };
 
+var randomFromArray = function (array) {
+  return array[Math.floor(Math.random() * array.length)];
+};
+
 // SVG Source
 var SVG_SOURCE =
   "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
@@ -59,10 +63,14 @@ var domParser = new DOMParser();
 var svgDocument = domParser.parseFromString(SVG_SOURCE, "image/svg+xml");
 log(svgDocument);
 
+var htmlCollectionToArray = function (htmlCollection) {
+  return [].slice.call(htmlCollection);
+};
+
 // Build up the SVG data I want
 var svgData = {
   svgNode: svgDocument.getElementsByTagName("svg")[0],
-  circleNodes: svgDocument.getElementsByTagName("circle")
+  circleNodes: htmlCollectionToArray(svgDocument.getElementsByTagName("circle"))
 };
 
 var worldWidth = svgData.viewboxWidth = svgData.svgNode.viewBox.baseVal.width;
@@ -79,6 +87,13 @@ var FREQ = {
   Gs: 830.609
 };
 
+var FREQUENCIES = [
+  440,
+  554.364,
+  659.255,
+  830.609
+];
+
 var sinFromFreq = function(freq) {
   return T("sin", {
     freq: freq,
@@ -91,6 +106,7 @@ var playSin = function(freq) {
 };
 
 var playPerc = function(freq1, freq2) {
+  return false;
   T("perc", {
       r: 500
     }, sinFromFreq(freq1), sinFromFreq(freq2))
@@ -185,30 +201,46 @@ var createCircle = function (x, y, radius, color, freq, options) {
 
   // Create Matter.js body
   var circle = Bodies.circle(x, y, radius, defaultOptions);
+
   // Add frequency
-  circle.freq = FREQ.A;
+  circle.freq = randomFromArray(FREQUENCIES);
+
+  // Add circle to world
+  World.add(engine.world, circle);
 
   log(circle);
   return circle;
 };
 
+
+
 // Create circles with sounds
-var circleA = createCircle(canvas.width * 0.5, canvas.height * 0.25, 25, '#76AC5B', FREQ.A);
+svgData.circleNodes.forEach(function (circleNode) {
+  var x = circleNode.cx.baseVal.value;
+  var y = circleNode.cy.baseVal.value;
+  var radius = circleNode.r.baseVal.value;
+  var color = circleNode.attributes.fill.value; // Why is this only on attributes?
+  var freq = FREQ.A;
 
-var circleCs = Bodies.circle(canvas.width * 0.5, canvas.height * 0.75, 25, bodyOptions);
-circleCs.freq = FREQ.Cs;
+  createCircle(x, y, radius, color, freq);
+});
 
-var circleE = Bodies.circle(canvas.width * 0.25, canvas.height * 0.5, 25, bodyOptions);
-circleE.freq = FREQ.E;
+// var circleA = createCircle(canvas.width * 0.5, canvas.height * 0.25, 25, '#76AC5B', FREQ.A);
 
-var circleGs = Bodies.circle(canvas.width * 0.75, canvas.height * 0.5, 25, bodyOptions);
-circleGs.freq = FREQ.Gs;
+// var circleCs = Bodies.circle(canvas.width * 0.5, canvas.height * 0.75, 25, bodyOptions);
+// circleCs.freq = FREQ.Cs;
+
+// var circleE = Bodies.circle(canvas.width * 0.25, canvas.height * 0.5, 25, bodyOptions);
+// circleE.freq = FREQ.E;
+
+// var circleGs = Bodies.circle(canvas.width * 0.75, canvas.height * 0.5, 25, bodyOptions);
+// circleGs.freq = FREQ.Gs;
 
 // Add a circle to the world (the world is actually a Composite)
-World.add(engine.world, circleA);
-World.add(engine.world, circleCs);
-World.add(engine.world, circleE);
-World.add(engine.world, circleGs);
+// World.add(engine.world, circleA);
+// World.add(engine.world, circleCs);
+// World.add(engine.world, circleE);
+// World.add(engine.world, circleGs);
 
 // add some some walls to the world
 var offset = 5;
