@@ -165,12 +165,35 @@ var bodyOptions = {
   }
 };
 
-// I can use DOMParser https://developer.mozilla.org/en-US/docs/Web/API/DOMParser
-// to parse an SVG string. This is how I will draw the logo.
+var createCircle = function (x, y, radius, color, freq, options) {
+  var defaultOptions = {
+    frictionAir: 0,
+    friction: 0.0001,
+    restitution: 0.8,
+    render: {
+      fillStyle: color
+    }
+  };
+
+  if (!options) {
+    options = {};
+  }
+
+  for (var attr in options) {
+    defaultOptions[attr] = options[attr];
+  }
+
+  // Create Matter.js body
+  var circle = Bodies.circle(x, y, radius, defaultOptions);
+  // Add frequency
+  circle.freq = FREQ.A;
+
+  log(circle);
+  return circle;
+};
 
 // Create circles with sounds
-var circleA = Bodies.circle(canvas.width * 0.5, canvas.height * 0.25, 25, bodyOptions);
-circleA.freq = FREQ.A;
+var circleA = createCircle(canvas.width * 0.5, canvas.height * 0.25, 25, '#76AC5B', FREQ.A);
 
 var circleCs = Bodies.circle(canvas.width * 0.5, canvas.height * 0.75, 25, bodyOptions);
 circleCs.freq = FREQ.Cs;
