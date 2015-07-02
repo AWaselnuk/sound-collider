@@ -41,9 +41,7 @@ var randomFromArray = function randomFromArray(array) {
   return array[Math.floor(Math.random() * array.length)];
 };
 
-//// SVG SOURCE
-
-var SVG_SOURCE = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n  <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\n  <!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n  <svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n     viewBox=\"0 0 792 612\" enable-background=\"new 0 0 792 612\" xml:space=\"preserve\">\n  <circle id=\"XMLID_1_\" fill=\"#F1584A\" cx=\"129.7\" cy=\"91.3\" r=\"36.3\"/>\n  <circle id=\"XMLID_2_\" fill=\"#00A29A\" cx=\"129.7\" cy=\"192.4\" r=\"9.8\"/>\n  <circle id=\"XMLID_3_\" fill=\"#F1E4BA\" cx=\"384.1\" cy=\"150.4\" r=\"76.7\"/>\n  <circle id=\"XMLID_4_\" fill=\"#6BBAAA\" cx=\"186.2\" cy=\"312.1\" r=\"81.3\"/>\n  <circle id=\"XMLID_5_\" fill=\"#F9A464\" cx=\"420.4\" cy=\"312.1\" r=\"16.1\"/>\n  <circle id=\"XMLID_6_\" fill=\"#F1E4BA\" cx=\"358.2\" cy=\"441.1\" r=\"55.4\"/>\n  <circle id=\"XMLID_7_\" fill=\"#F9A464\" cx=\"683.1\" cy=\"66.5\" r=\"14.5\"/>\n  <circle id=\"XMLID_8_\" fill=\"#F1584A\" cx=\"638.5\" cy=\"220.9\" r=\"78.2\"/>\n  <circle id=\"XMLID_9_\" fill=\"#F1E4BA\" cx=\"571.2\" cy=\"390.3\" r=\"9.3\"/>\n  <circle id=\"XMLID_10_\" fill=\"#F9A464\" cx=\"646.8\" cy=\"519.3\" r=\"83.9\"/>\n  <circle id=\"XMLID_11_\" fill=\"#F9A464\" cx=\"83.6\" cy=\"483\" r=\"24.9\"/>\n  <circle id=\"XMLID_12_\" fill=\"#6BBAAA\" cx=\"542.2\" cy=\"62.8\" r=\"7.8\"/>\n  <circle id=\"XMLID_13_\" fill=\"#00A29A\" cx=\"509\" cy=\"233.3\" r=\"3.1\"/>\n  <circle id=\"XMLID_14_\" fill=\"#00A29A\" cx=\"200.2\" cy=\"507.9\" r=\"50.8\"/>\n  <circle id=\"XMLID_15_\" fill=\"#6BBAAA\" cx=\"490.9\" cy=\"470.1\" r=\"7.3\"/>\n  <circle id=\"XMLID_16_\" fill=\"#F1584A\" cx=\"404.3\" cy=\"549.4\" r=\"25.9\"/>\n  <circle id=\"XMLID_17_\" fill=\"#F9A464\" cx=\"258.7\" cy=\"66.5\" r=\"14.5\"/>\n  <g id=\"XMLID_18_\">\n  </g>\n  <g id=\"XMLID_19_\">\n  </g>\n  <g id=\"XMLID_20_\">\n  </g>\n  <g id=\"XMLID_21_\">\n  </g>\n  <g id=\"XMLID_22_\">\n  </g>\n  <g id=\"XMLID_23_\">\n  </g>\n  </svg>";
+//// SVG Parser
 
 var SVGParser = (function () {
   function SVGParser(svgSource) {
@@ -108,8 +106,6 @@ var MusicMachine = (function () {
 
   return MusicMachine;
 })();
-
-var musicMachine = new MusicMachine(T);
 
 //// SOUND COLLIDER
 //// MATTER.JS - http://brm.io/matter-js/
@@ -188,22 +184,22 @@ var SoundCollider = (function () {
       var rectA = this.Bodies.rectangle(this.width / 2, -offset, this.width + 2 * offset, 50, {
         isStatic: true
       });
-      rectA.freq = musicMachine.notes.A;
+      rectA.freq = this.MusicMachine.notes.A;
 
       var rectCs = this.Bodies.rectangle(this.width / 2, this.height + offset, this.width + 2 * offset, 50, {
         isStatic: true
       });
-      rectCs.freq = musicMachine.notes.Cs;
+      rectCs.freq = this.MusicMachine.notes.Cs;
 
       var rectE = this.Bodies.rectangle(this.width + offset, this.height / 2, 50, this.height + 2 * offset, {
         isStatic: true
       });
-      rectE.freq = musicMachine.notes.E;
+      rectE.freq = this.MusicMachine.notes.E;
 
       var rectGs = this.Bodies.rectangle(-offset, this.height / 2, 50, this.height + 2 * offset, {
         isStatic: true
       });
-      rectGs.freq = musicMachine.notes.Gs;
+      rectGs.freq = this.MusicMachine.notes.Gs;
 
       this.World.add(this.engine.world, [rectA, rectCs, rectE, rectGs]);
     }
@@ -256,8 +252,12 @@ var SoundCollider = (function () {
 
 //// RUN PROGRAM
 
+var SVG_SOURCE = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n  <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\n  <!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n  <svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n     viewBox=\"0 0 792 612\" enable-background=\"new 0 0 792 612\" xml:space=\"preserve\">\n  <circle id=\"XMLID_1_\" fill=\"#F1584A\" cx=\"129.7\" cy=\"91.3\" r=\"36.3\"/>\n  <circle id=\"XMLID_2_\" fill=\"#00A29A\" cx=\"129.7\" cy=\"192.4\" r=\"9.8\"/>\n  <circle id=\"XMLID_3_\" fill=\"#F1E4BA\" cx=\"384.1\" cy=\"150.4\" r=\"76.7\"/>\n  <circle id=\"XMLID_4_\" fill=\"#6BBAAA\" cx=\"186.2\" cy=\"312.1\" r=\"81.3\"/>\n  <circle id=\"XMLID_5_\" fill=\"#F9A464\" cx=\"420.4\" cy=\"312.1\" r=\"16.1\"/>\n  <circle id=\"XMLID_6_\" fill=\"#F1E4BA\" cx=\"358.2\" cy=\"441.1\" r=\"55.4\"/>\n  <circle id=\"XMLID_7_\" fill=\"#F9A464\" cx=\"683.1\" cy=\"66.5\" r=\"14.5\"/>\n  <circle id=\"XMLID_8_\" fill=\"#F1584A\" cx=\"638.5\" cy=\"220.9\" r=\"78.2\"/>\n  <circle id=\"XMLID_9_\" fill=\"#F1E4BA\" cx=\"571.2\" cy=\"390.3\" r=\"9.3\"/>\n  <circle id=\"XMLID_10_\" fill=\"#F9A464\" cx=\"646.8\" cy=\"519.3\" r=\"83.9\"/>\n  <circle id=\"XMLID_11_\" fill=\"#F9A464\" cx=\"83.6\" cy=\"483\" r=\"24.9\"/>\n  <circle id=\"XMLID_12_\" fill=\"#6BBAAA\" cx=\"542.2\" cy=\"62.8\" r=\"7.8\"/>\n  <circle id=\"XMLID_13_\" fill=\"#00A29A\" cx=\"509\" cy=\"233.3\" r=\"3.1\"/>\n  <circle id=\"XMLID_14_\" fill=\"#00A29A\" cx=\"200.2\" cy=\"507.9\" r=\"50.8\"/>\n  <circle id=\"XMLID_15_\" fill=\"#6BBAAA\" cx=\"490.9\" cy=\"470.1\" r=\"7.3\"/>\n  <circle id=\"XMLID_16_\" fill=\"#F1584A\" cx=\"404.3\" cy=\"549.4\" r=\"25.9\"/>\n  <circle id=\"XMLID_17_\" fill=\"#F9A464\" cx=\"258.7\" cy=\"66.5\" r=\"14.5\"/>\n  <g id=\"XMLID_18_\">\n  </g>\n  <g id=\"XMLID_19_\">\n  </g>\n  <g id=\"XMLID_20_\">\n  </g>\n  <g id=\"XMLID_21_\">\n  </g>\n  <g id=\"XMLID_22_\">\n  </g>\n  <g id=\"XMLID_23_\">\n  </g>\n  </svg>";
+
 var svgParser = new SVGParser(SVG_SOURCE);
 _log(svgParser);
+
+var musicMachine = new MusicMachine(T);
 
 var soundCollider = new SoundCollider(svgParser.svgData.viewboxWidth, svgParser.svgData.viewboxHeight, Matter, musicMachine);
 _log(soundCollider);
