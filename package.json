@@ -5,6 +5,8 @@
   "main": "soundcollider.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel soundcollider.es6 --out-file soundcollider.js",
+    "watch": "babel soundcollider.es6 --watch --out-file soundcollider.js"
   },
   "repository": {
     "type": "git",
@@ -18,9 +20,5 @@
   "homepage": "https://github.com/AWaselnuk/sound-collider",
   "devDependencies": {
     "babel": "latest"
-  },
-  "scripts": {
-    "build": "babel soundcollider.es6 --out-file soundcollider.js",
-    "watch": "babel soundcollider.es6 --watch --out-file soundcollider.js"
   }
 }
