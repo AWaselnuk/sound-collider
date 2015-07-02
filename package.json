@@ -4,7 +4,7 @@
   "description": "An experiment with Matter.js and Timbre.js",
   "main": "soundcollider.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel soundcollider.es6 --out-file soundcollider.js",
     "watch": "babel soundcollider.es6 --watch --out-file soundcollider.js"
   },
