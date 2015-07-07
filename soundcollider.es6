@@ -219,7 +219,6 @@ const SVG_SOURCE =
   <circle id="XMLID_7_" fill="#F9A464" cx="683.1" cy="66.5" r="14.5"/>
   <circle id="XMLID_8_" fill="#F1584A" cx="638.5" cy="220.9" r="78.2"/>
   <circle id="XMLID_9_" fill="#F1E4BA" cx="571.2" cy="390.3" r="9.3"/>
-  <circle id="XMLID_10_" fill="#F9A464" cx="646.8" cy="519.3" r="83.9"/>
   <circle id="XMLID_11_" fill="#F9A464" cx="83.6" cy="483" r="24.9"/>
   <circle id="XMLID_12_" fill="#6BBAAA" cx="542.2" cy="62.8" r="7.8"/>
   <circle id="XMLID_13_" fill="#00A29A" cx="509" cy="233.3" r="3.1"/>
